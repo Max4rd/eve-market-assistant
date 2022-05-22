@@ -9,11 +9,13 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia'
+import { useAuthenticationStore } from '@/stores/authentication'
+
 export default {
-  name: "TheHeader",
+  name: 'TheHeader',
   methods: {
-    login() {
-    },
+    ...mapActions(useAuthenticationStore, ['login']),
   },
 }
 </script>
