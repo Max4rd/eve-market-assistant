@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="login">
+    <button @click="authorize">
       <img
           src="../assets/eve-sso-login-black-large.png"
           alt="Eve SSO Login">
@@ -15,7 +15,7 @@ import { useAuthenticationStore } from '@/stores/authentication'
 export default {
   name: 'TheHeader',
   methods: {
-    ...mapActions(useAuthenticationStore, ['login']),
+    ...mapActions(useAuthenticationStore, ['authorize']),
   },
 }
 </script>
