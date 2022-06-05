@@ -1,9 +1,11 @@
 <script>
 export default {
-  name: 'App',
+  name: "TheContent",
 }
 </script>
 
 <template>
-  <router-view></router-view>
+  <div>
+    The Content
+  </div>
 </template>
