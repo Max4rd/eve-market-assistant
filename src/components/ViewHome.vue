@@ -1,12 +1,19 @@
 <template>
-  <TheHeader/>
+  <div>
+    <TheHeader/>
+  </div>
+
+  <div>
+    <TheSidebar/>
+  </div>
 </template>
 
 <script>
 import TheHeader from '@/components/TheHeader'
+import TheSidebar from "@/components/TheSidebar";
 
 export default {
   name: 'ViewHome',
-  components: { TheHeader },
+  components: { TheSidebar, TheHeader },
 }
 </script>
