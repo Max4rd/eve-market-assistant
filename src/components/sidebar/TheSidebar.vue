@@ -1,30 +1,19 @@
 <script>
+import SidebarHeader from '@/components/sidebar/SidebarHeader'
+import MarketBrowser from '@/components/sidebar/browser/MarketBrowser'
+
 export default {
-  name: "TheSidebar",
-  data() {
-    return {
-      marketGroups: [
-        'Blueprints',
-        'Ships',
-        'Equipments',
-        'Ammo',
-        'Trade Goods',
-        'Implants',
-        'Skills',
-        'Drones',
-      ],
-    }
+  name: 'TheSidebar',
+  components: {
+    MarketBrowser,
+    SidebarHeader
   },
 }
 </script>
 
 <template>
-  <div class="overflow-auto">
-    <div
-      v-for="group in marketGroups"
-      :key="group.id"
-    >
-      {{ group }}
-    </div>
+  <div>
+    <SidebarHeader/>
+    <MarketBrowser/>
   </div>
 </template>

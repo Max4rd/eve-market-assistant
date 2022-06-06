@@ -1,11 +1,15 @@
 <script>
 import TheHeader from '@/components/header/TheHeader'
-import TheSidebar from "@/components/sidebar/TheSidebar";
-import TheContent from "@/components/content/TheContent";
+import TheSidebar from '@/components/sidebar/TheSidebar'
+import TheContent from '@/components/content/TheContent'
 
 export default {
   name: 'ViewHome',
-  components: { TheContent, TheSidebar, TheHeader },
+  components: {
+    TheHeader,
+    TheSidebar,
+    TheContent,
+  },
 }
 </script>
 

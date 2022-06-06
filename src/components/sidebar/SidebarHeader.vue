@@ -1,11 +1,11 @@
 <script>
 export default {
-  name: 'TheContent',
+  name: 'SidebarHeader',
 }
 </script>
 
 <template>
   <div>
-    The Content
+    Sidebar Header
   </div>
 </template>

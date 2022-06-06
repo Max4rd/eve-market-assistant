@@ -17,7 +17,7 @@ export default {
       class="m-2"
     >
       <img
-        src="../../assets/eve-sso-login-black-large.png"
+        src="@/assets/eve-sso-login-black-large.png"
         alt="Eve SSO Login"
       >
     </button>
