@@ -4,6 +4,7 @@ import MarketBrowser from '@/components/sidebar/browser/MarketBrowser'
 
 export default {
   name: 'TheSidebar',
+
   components: {
     MarketBrowser,
     SidebarHeader
@@ -12,8 +13,8 @@ export default {
 </script>
 
 <template>
-  <div>
+  <nav>
     <SidebarHeader/>
     <MarketBrowser/>
-  </div>
+  </nav>
 </template>

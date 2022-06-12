@@ -1,5 +1,5 @@
 <script>
-import MarketBrowserItem from '@/components/sidebar/browser/MarketBrowserItem'
+import MarketBrowserItem from '@/components/sidebar/browser/MarketBrowserItem';
 
 export default {
   name: 'MarketBrowser',
@@ -8,29 +8,10 @@ export default {
 
   data() {
     return {
-      marketGroups: [
-        2,
-        4,
-        9,
-        11,
-        19,
-        24,
-        150,
-        157,
-        475,
-        477,
-        955,
-        1320,
-        1396,
-        1659,
-        1922,
-        1954,
-        2202,
-        2203,
-      ],
-    }
+      marketGroups: [],
+    };
   },
-}
+};
 </script>
 
 <template>

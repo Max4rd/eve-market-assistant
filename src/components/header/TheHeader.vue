@@ -1,13 +1,14 @@
 <script>
-import { mapActions } from 'pinia'
-import { useAuthenticationStore } from '@/stores/authentication'
+import { mapActions } from 'pinia';
+import { useAuthenticationStore } from '@/stores/authentication';
 
 export default {
   name: 'TheHeader',
+
   methods: {
     ...mapActions(useAuthenticationStore, ['login']),
   },
-}
+};
 </script>
 
 <template>
