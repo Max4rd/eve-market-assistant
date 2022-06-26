@@ -1,4 +1,6 @@
 <script>
+import { mapStores } from 'pinia';
+import { useEmaSdeStore } from '@/stores/ema-sde';
 import MarketBrowserItem from '@/components/sidebar/browser/MarketBrowserItem';
 
 export default {
@@ -11,6 +13,17 @@ export default {
       marketGroups: [],
     };
   },
+
+  computed: {
+    ...mapStores(useEmaSdeStore),
+  },
+
+  created() {
+    this.marketGroups = this.emaSdeStore.getMarketTree();
+  },
+
+  methods: {
+  },
 };
 </script>
 
@@ -22,7 +35,7 @@ export default {
     <MarketBrowserItem
       v-for="item in marketGroups"
       :key="item.id"
-      :market-group-id="item"
+      :market-item="item"
     />
   </ul>
 </template>

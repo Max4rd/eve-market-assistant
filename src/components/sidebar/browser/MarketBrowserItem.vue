@@ -3,15 +3,12 @@ export default {
   name: 'MarketBrowserItem',
 
   props: {
-    marketGroupId: Number,
+    marketItem: {
+      type: Object,
+    },
   },
 
   computed: {
-    /*
-    imageSource() {
-      return ''
-    }
-    */
   },
 };
 </script>
@@ -22,7 +19,7 @@ export default {
       <img src="@/assets/smallfolder.png"/>
     </div>
     <div>
-      {{ marketGroupId }}
+      {{ marketItem.marketGroupName }}
     </div>
   </div>
 </template>
