@@ -1,9 +1,11 @@
 <script>
 export default {
-  name: 'App',
+  name: 'SidebarHeader',
 };
 </script>
 
 <template>
-  <router-view></router-view>
+  <div>
+    Sidebar Header
+  </div>
 </template>
