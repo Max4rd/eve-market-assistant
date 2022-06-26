@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-row-reverse bg-gray-700 border-b-2 border-b-gray-400">
+  <div class="flex flex-row-reverse bg-gray-700 border-b-1 border-b-gray-400">
     <button
       @click="login"
       class="m-2"

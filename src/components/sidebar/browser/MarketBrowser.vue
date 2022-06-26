@@ -38,11 +38,11 @@ export default {
   <div>
     Market Browser
   </div>
-  <ul>
+  <ul class="bg-gray-700 text-white divide-y divide-gray-400">
     <MarketBrowserItem
       v-for="item in marketTree"
       :key="item.id"
       :market-item="item"
-    />
+      :depth="0"/>
   </ul>
 </template>
