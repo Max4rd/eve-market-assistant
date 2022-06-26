@@ -10,7 +10,7 @@ export default {
 
   data() {
     return {
-      marketGroups: [],
+      marketTree: [],
     };
   },
 
@@ -19,10 +19,17 @@ export default {
   },
 
   created() {
-    this.marketGroups = this.emaSdeStore.getMarketTree();
+    this.fetchTree();
   },
 
   methods: {
+    async fetchTree() {
+      this.emaSdeStore.getMarketTree()
+      .then(response => response.json())
+      .then(data => {
+        this.marketTree = data.data;
+      });
+    },
   },
 };
 </script>
@@ -33,7 +40,7 @@ export default {
   </div>
   <ul>
     <MarketBrowserItem
-      v-for="item in marketGroups"
+      v-for="item in marketTree"
       :key="item.id"
       :market-item="item"
     />
