@@ -1,12 +1,12 @@
 <script>
 import { mapStores } from 'pinia';
 import { useEmaSdeStore } from '@/stores/ema-sde';
-import MarketBrowserItem from '@/components/sidebar/browser/MarketBrowserItem';
+import MarketBrowserGroup from '@/components/sidebar/browser/MarketBrowserGroup';
 
 export default {
   name: 'MarketBrowser',
 
-  components: { MarketBrowserItem },
+  components: { MarketBrowserGroup },
 
   data() {
     return {
@@ -25,10 +25,10 @@ export default {
   methods: {
     async fetchTree() {
       this.emaSdeStore.getMarketTree()
-      .then(response => response.json())
-      .then(data => {
-        this.marketTree = data.data;
-      });
+        .then(response => response.json())
+        .then(data => {
+          this.marketTree = data.data;
+        });
     },
   },
 };
@@ -39,10 +39,10 @@ export default {
     Market Browser
   </div>
   <ul class="bg-gray-700 text-white divide-y divide-gray-400">
-    <MarketBrowserItem
+    <MarketBrowserGroup
       v-for="item in marketTree"
       :key="item.id"
-      :market-item="item"
+      :market-group="item"
       :depth="0"/>
   </ul>
 </template>
