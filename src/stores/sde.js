@@ -2,20 +2,20 @@ import { defineStore } from 'pinia';
 
 const emaSdeUrl = 'http://localhost:3000';
 
-export const useEmaSdeStore = defineStore('emaSde', {
+export const useSdeStore = defineStore('sde', {
   actions: {
     // Market routes
-    getMarketGroups(parentId) {
+    fetchMarketGroups(parentId) {
       const url = emaSdeUrl + `/market/groups/${parentId}`;
       return fetch(url);
     },
 
-    getMarketTypes(groupId) {
+    fetchMarketTypes(groupId) {
       const url = emaSdeUrl + `/market/types/${groupId}`;
       return fetch(url);
     },
 
-    getMarketTree() {
+    fetchMarketTree() {
       const url = emaSdeUrl + '/market/tree';
       return fetch(url);
     },

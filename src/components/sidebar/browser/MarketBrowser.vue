@@ -1,6 +1,6 @@
 <script>
 import { mapStores } from 'pinia';
-import { useEmaSdeStore } from '@/stores/ema-sde';
+import { useSdeStore } from '@/stores/sde';
 import MarketBrowserGroup from '@/components/sidebar/browser/MarketBrowserGroup';
 
 export default {
@@ -15,7 +15,7 @@ export default {
   },
 
   computed: {
-    ...mapStores(useEmaSdeStore),
+    ...mapStores(useSdeStore),
   },
 
   created() {
@@ -23,8 +23,8 @@ export default {
   },
 
   methods: {
-    async fetchTree() {
-      this.emaSdeStore.getMarketTree()
+    fetchTree() {
+      this.sdeStore.fetchMarketTree()
         .then(response => response.json())
         .then(data => {
           this.marketTree = data.data;

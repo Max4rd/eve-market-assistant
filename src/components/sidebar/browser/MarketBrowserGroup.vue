@@ -1,6 +1,6 @@
 <script>
 import { mapStores } from 'pinia/dist/pinia';
-import { useEmaSdeStore } from '@/stores/ema-sde';
+import { useSdeStore } from '@/stores/sde';
 import MarketBrowserType from '@/components/sidebar/browser/MarketBrowserType';
 
 export default {
@@ -24,11 +24,14 @@ export default {
   },
 
   computed: {
-    ...mapStores(useEmaSdeStore),
+    ...mapStores(useSdeStore),
 
     margin() {
       return `ml-${this.depth * 4}`;
     },
+  },
+
+  created() {
   },
 
   methods: {
@@ -40,8 +43,8 @@ export default {
       }
     },
 
-    async fetchTypes() {
-      this.emaSdeStore.getMarketTypes(this.marketGroup.marketGroupID)
+    fetchTypes() {
+      this.sdeStore.fetchMarketTypes(this.marketGroup.marketGroupID)
         .then(response => response.json())
         .then(data => {
           this.types = data.data;
@@ -52,7 +55,7 @@ export default {
 </script>
 
 <template>
-  <li :class="[margin]">
+  <li :class="margin">
     <div
         class="flex flex-row items-center"
         @click="toggle()">
@@ -66,8 +69,7 @@ export default {
 
     <ul
         v-show="isShown"
-        class="divide-y divide-gray-400"
-        :class="[margin]">
+        :class="margin">
       <MarketBrowserGroup
           v-for="item in marketGroup.children"
           :key="item.id"
@@ -77,7 +79,8 @@ export default {
       <MarketBrowserType
           v-for="item in types"
           :key="item.id"
-          :market-type="item"/>
+          :market-type="item"
+          :depth="depth + 1"/>
     </ul>
   </li>
 </template>
