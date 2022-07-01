@@ -1,4 +1,7 @@
 <script>
+import { mapStores } from 'pinia/dist/pinia';
+import { useImageStore } from '@/stores/image';
+
 export default {
   name: 'MarketBrowserType',
 
@@ -18,12 +21,21 @@ export default {
   },
 
   computed: {
+    ...mapStores(useImageStore),
+
     margin() {
       return `ml-${this.depth * 4}`;
     },
+  },
 
-    imageSource() {
-      return this.image ?? '@/assets/7_64_15.png';
+  created() {
+    this.fetchImage();
+  },
+
+  methods: {
+    fetchImage() {
+      this.imageStore.fetchImage('types', this.marketType.typeID, 'icon', 32)
+        .then(response => console.log(response));
     }
   },
 };
