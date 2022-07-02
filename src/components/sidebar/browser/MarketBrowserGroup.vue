@@ -31,9 +31,6 @@ export default {
     },
   },
 
-  created() {
-  },
-
   methods: {
     toggle() {
       this.isShown = !this.isShown;
