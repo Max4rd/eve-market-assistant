@@ -19,5 +19,11 @@ export const useSdeStore = defineStore('sde', {
       const url = emaSdeUrl + '/market/tree';
       return fetch(url);
     },
+
+    // Region route
+    fetchRegion() {
+      const url = emaSdeUrl + '/region';
+      return fetch(url);
+    },
   },
 });
