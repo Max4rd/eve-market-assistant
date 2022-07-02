@@ -1,6 +1,7 @@
 <script>
 import { mapStores } from 'pinia/dist/pinia';
 import { useImageStore } from '@/stores/image';
+import { useItemStore } from '@/stores/item';
 
 export default {
   name: 'MarketBrowserType',
@@ -21,7 +22,7 @@ export default {
   },
 
   computed: {
-    ...mapStores(useImageStore),
+    ...mapStores(useImageStore, useItemStore),
 
     margin() {
       return `ml-${this.depth * 4}`;
@@ -29,20 +30,24 @@ export default {
   },
 
   created() {
-    this.fetchImage();
+    // this.fetchImage();
   },
 
   methods: {
     fetchImage() {
       this.imageStore.fetchImage('types', this.marketType.typeID, 'icon', 32)
         .then(response => console.log(response));
+    },
+
+    selectItem() {
+      this.itemStore.selected = this.marketType;
     }
   },
 };
 </script>
 
 <template>
-  <li :class="margin">
+  <li :class="margin" @click="selectItem">
     <div class="flex flex-row items-center">
       <div class="w-6">
         <img v-if="image" :src="image">
