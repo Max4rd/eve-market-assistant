@@ -35,9 +35,6 @@ export default {
 </script>
 
 <template>
-  <div>
-    Market Browser
-  </div>
   <ul class="bg-gray-700 text-white divide-y divide-gray-400">
     <MarketBrowserGroup
       v-for="item in marketTree"
