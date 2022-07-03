@@ -1,0 +1,13 @@
+import { defineStore } from 'pinia';
+
+const esiUrl = 'https://esi.evetech.net/latest';
+
+export const useEsiStore = defineStore('esi', {
+  actions: {
+    fetchMarketOrders(regionId, typeId, orderType) {
+      let url = esiUrl + `/markets/${regionId}/orders/`;
+      url += `?order_type=${orderType}&type_id=${typeId}`;
+      return fetch(url);
+    },
+  },
+});

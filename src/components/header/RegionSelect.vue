@@ -9,11 +9,19 @@ export default {
   data() {
     return {
       regions: [],
+      selected: '',
     }
   },
 
   computed: {
     ...mapStores(useSdeStore, useRegionStore),
+  },
+
+  watch: {
+    selected(newSelected) {
+      this.regionStore.selected = this.regions
+        .find(region => region.regionName === newSelected);
+    },
   },
 
   created() {
@@ -34,7 +42,7 @@ export default {
 
 <template>
   <div>
-    <select v-model="regionStore.selected">
+    <select v-model="selected">
       <option v-for="region in regions" :key="region.id">
         {{ region.regionName }}
       </option>
