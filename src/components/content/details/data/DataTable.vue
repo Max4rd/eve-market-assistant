@@ -12,6 +12,7 @@ export default {
     regionId: Number,
     typeId: Number,
     orderType: String,
+    tableHead: Object,
   },
 
   data() {
@@ -49,12 +50,22 @@ export default {
 
 <template>
   <div>
-    <div>
-      Data Table
-    </div>
-    <DataItem
-        v-for="order in orders"
-        :key="order.id"
-        :item="order"/>
+    <table>
+      <thead>
+        <tr>
+          <th v-for="head in tableHead" :key="head.id">
+            {{ head.name }}
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <DataItem
+            v-for="order in orders"
+            :key="order.id"
+            :head="tableHead"
+            :item="order"/>
+      </tbody>
+    </table>
   </div>
 </template>

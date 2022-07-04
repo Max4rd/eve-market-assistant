@@ -9,6 +9,30 @@ export default {
 
   components: { DataTable },
 
+  data() {
+    return {
+      buyerTableHead: [
+        {
+          name: 'Quantity',
+          fields: ['volume_remain'],
+        },
+        {
+          name: 'Price',
+          fields: ['price'],
+        },
+        {
+          name: 'Location',
+          fields: ['location_id', 'system_id'],
+        },
+        {
+          name: 'Expires in',
+          fields: ['issued', 'duration'],
+        },
+      ],
+      sellerTableHead: {},
+    };
+  },
+
   computed: {
     ...mapState(useRegionStore, {
       selectedRegion: 'selected',
@@ -22,6 +46,16 @@ export default {
 
 <template>
   <div>
+    Buyers
+  </div>
+
+  <DataTable
+      :region-id="selectedRegion?.regionID"
+      :type-id="selectedItem?.typeID"
+      order-type="buy"
+      :table-head="buyerTableHead"/>
+
+  <div>
     Sellers
   </div>
 
@@ -29,13 +63,4 @@ export default {
       :region-id="selectedRegion?.regionID"
       :type-id="selectedItem?.typeID"
       order-type="sell"/>
-
-  <div>
-    Buyers
-  </div>
-
-  <DataTable
-      :region-id="selectedRegion?.regionID"
-      :type-id="selectedItem?.typeID"
-      order-type="buy"/>
 </template>
