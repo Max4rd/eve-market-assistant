@@ -29,7 +29,32 @@ export default {
           fields: ['issued', 'duration'],
         },
       ],
-      sellerTableHead: {},
+      sellerTableHead: [
+        {
+          name: 'Quantity',
+          fields: ['volume_remain'],
+        },
+        {
+          name: 'Price',
+          fields: ['price'],
+        },
+        {
+          name: 'Location',
+          fields: ['location_id', 'system_id'],
+        },
+        {
+          name: 'Range',
+          fields: ['range'],
+        },
+        {
+          name: 'Min volume',
+          fields: ['min_volume'],
+        },
+        {
+          name: 'Expires in',
+          fields: ['issued', 'duration'],
+        },
+      ],
     };
   },
 
@@ -62,5 +87,6 @@ export default {
   <DataTable
       :region-id="selectedRegion?.regionID"
       :type-id="selectedItem?.typeID"
-      order-type="sell"/>
+      order-type="sell"
+      :table-head="sellerTableHead"/>
 </template>
