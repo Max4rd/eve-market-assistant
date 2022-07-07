@@ -71,22 +71,24 @@ export default {
 
 <template>
   <div>
-    Buyers
+    <div>
+      Buyers
+    </div>
+
+    <DataTable
+        :region-id="selectedRegion?.regionID"
+        :type-id="selectedItem?.typeID"
+        order-type="buy"
+        :table-head="buyerTableHead"/>
+
+    <div>
+      Sellers
+    </div>
+
+    <DataTable
+        :region-id="selectedRegion?.regionID"
+        :type-id="selectedItem?.typeID"
+        order-type="sell"
+        :table-head="sellerTableHead"/>
   </div>
-
-  <DataTable
-      :region-id="selectedRegion?.regionID"
-      :type-id="selectedItem?.typeID"
-      order-type="buy"
-      :table-head="buyerTableHead"/>
-
-  <div>
-    Sellers
-  </div>
-
-  <DataTable
-      :region-id="selectedRegion?.regionID"
-      :type-id="selectedItem?.typeID"
-      order-type="sell"
-      :table-head="sellerTableHead"/>
 </template>
