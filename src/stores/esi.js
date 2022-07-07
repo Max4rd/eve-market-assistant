@@ -9,5 +9,11 @@ export const useEsiStore = defineStore('esi', {
       url += `?order_type=${orderType}&type_id=${typeId}`;
       return fetch(url);
     },
+
+    fetchMarketHistory(regionId, typeId) {
+      let url = esiUrl + `/markets/${regionId}/history/`;
+      url += `?type_id=${typeId}`;
+      return fetch(url);
+    },
   },
 });

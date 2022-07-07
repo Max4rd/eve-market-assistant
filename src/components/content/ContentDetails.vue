@@ -1,4 +1,7 @@
 <script>
+import { mapState } from 'pinia';
+import { useRegionStore } from '@/stores/region';
+import { useItemStore } from '@/stores/item';
 import DetailsInfo from '@/components/content/details/DetailsInfo';
 import DetailsTabs from '@/components/content/details/DetailsTabs';
 import DetailsData from '@/components/content/details/DetailsData';
@@ -15,6 +18,15 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState(useRegionStore, {
+      selectedRegion: 'selected',
+    }),
+    ...mapState(useItemStore, {
+      selectedItem: 'selected',
+    }),
+  },
+
   methods: {
     handleChangeTab(newTab) {
       this.selectedTab = newTab;
@@ -29,9 +41,17 @@ export default {
 
     <DetailsTabs @changeTab="handleChangeTab"/>
 
-    <DetailsData v-show="selectedTab === 'data'"/>
+    <DetailsData
+        v-show="selectedTab === 'data'"
+        :selected-region="selectedRegion"
+        :selected-item="selectedItem"
+    />
 
-    <DetailsHistory v-show="selectedTab === 'history'"/>
+    <DetailsHistory
+        v-show="selectedTab === 'history'"
+        :selected-region="selectedRegion"
+        :selected-item="selectedItem"
+    />
 
     <!-- TODO: add DetailsPrediction component -->
   </div>
