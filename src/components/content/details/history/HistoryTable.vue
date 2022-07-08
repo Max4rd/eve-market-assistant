@@ -56,6 +56,10 @@ export default {
     },
   },
 
+  created() {
+    this.fetchStatistics();
+  },
+
   methods: {
     fetchStatistics() {
       if (this.regionId && this.typeId) {

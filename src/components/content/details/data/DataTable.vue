@@ -34,6 +34,10 @@ export default {
     },
   },
 
+  created() {
+    this.fetchOrders();
+  },
+
   methods: {
     fetchOrders() {
       if (this.regionId && this.typeId) {

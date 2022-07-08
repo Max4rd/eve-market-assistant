@@ -6,11 +6,12 @@ import DetailsInfo from '@/components/content/details/DetailsInfo';
 import DetailsTabs from '@/components/content/details/DetailsTabs';
 import DetailsData from '@/components/content/details/DetailsData';
 import DetailsHistory from '@/components/content/details/DetailsHistory';
+import DetailsPrediction from '@/components/content/details/DetailsPrediction';
 
 export default {
   name: 'ContentDetails',
 
-  components: { DetailsHistory, DetailsData, DetailsTabs, DetailsInfo },
+  components: { DetailsPrediction, DetailsHistory, DetailsData, DetailsTabs, DetailsInfo },
 
   data() {
     return {
@@ -53,6 +54,10 @@ export default {
         :selected-item="selectedItem"
     />
 
-    <!-- TODO: add DetailsPrediction component -->
+    <DetailsPrediction
+        v-show="selectedTab === 'prediction'"
+        :selected-region="selectedRegion"
+        :selected-item="selectedItem"
+    />
   </div>
 </template>
