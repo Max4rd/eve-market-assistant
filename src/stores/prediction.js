@@ -9,11 +9,6 @@ const algorithms = {
 };
 
 export const usePredictionStore = defineStore('prediction', {
-  state: () => {
-    return {
-      history: [],
-    };
-  },
   actions: {
     predict(algorithm, parameters, data) {
       return algorithms[algorithm](data ,parameters);

@@ -13,7 +13,11 @@ export default {
 
   data() {
     return {
-      data: [],
+      data: {
+        history: [],
+        buyOrders: [],
+        sellOrders: [],
+      },
       result: null,
     };
   },
@@ -39,21 +43,63 @@ export default {
     fetchData() {
       this.result = null;
       if (this.selectedRegion && this.selectedItem) {
-        this.esiStore.fetchMarketHistory(this.selectedRegion.regionID, this.selectedItem.typeID)
-          .then(response => response.json())
-          .then(data => {
-            console.log(data);
-            this.data = data;
-          });
+        this.fetchHistory();
+        this.fetchOrders();
       }
+    },
+
+    fetchHistory() {
+      this.esiStore.fetchMarketHistory(this.selectedRegion.regionID, this.selectedItem.typeID)
+        .then(response => response.json())
+        .then(data => {
+          this.data.history = data;
+        });
+    },
+
+    fetchOrders() {
+      this.fetchBuyOrders();
+      this.fetchSellOrders();
+    },
+
+    fetchBuyOrders() {
+      this.esiStore.fetchMarketOrders(this.selectedRegion.regionID, this.selectedItem.typeID, 'buy')
+        .then(response => response.json())
+        .then(data => {
+          this.data.buyOrders = this.orderByPrice(data, false);
+        });
+    },
+
+    fetchSellOrders() {
+      this.esiStore.fetchMarketOrders(this.selectedRegion.regionID, this.selectedItem.typeID, 'sell')
+        .then(response => response.json())
+        .then(data => {
+          this.data.sellOrders = this.orderByPrice(data, true);
+        });
+    },
+
+    orderByPrice(data, ascending = false) {
+      return data.sort((a, b) => {
+        if (ascending) {
+          return a.price - b.price;
+        } else {
+          return b.price - a.price;
+        }
+      });
     },
 
     performPrediction() {
       this.result = null;
-      if (this.data.length > 0) {
-        this.result = this.predictionStore.predict('movingAverage', {}, this.data);
+      if (this.isDataValid()) {
+        const parameters = { period: 20 };
+        this.result = this.predictionStore.predict('movingAverage', parameters, this.data);
       }
     },
+
+    isDataValid() {
+      return this.data.history.length > 0
+        && this.data.buyOrders.length > 0
+        && this.data.sellOrders.length > 0;
+    }
   },
 };
 </script>
