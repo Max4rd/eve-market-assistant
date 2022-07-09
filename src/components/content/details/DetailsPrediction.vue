@@ -18,12 +18,26 @@ export default {
         buyOrders: [],
         sellOrders: [],
       },
+      parameters: {
+        longPeriod: 1,
+        shortPeriod: 1,
+      },
       result: null,
     };
   },
 
   computed: {
     ...mapStores(useEsiStore, usePredictionStore),
+
+    isDataValid() {
+      return this.data.history.length > 0
+        && this.data.buyOrders.length > 0
+        && this.data.sellOrders.length > 0;
+    },
+
+    isParametersValid() {
+      return this.parameters.longPeriod > this.parameters.shortPeriod;
+    },
   },
 
   watch: {
@@ -89,23 +103,36 @@ export default {
 
     performPrediction() {
       this.result = null;
-      if (this.isDataValid()) {
-        const parameters = { period: 20 };
-        this.result = this.predictionStore.predict('movingAverage', parameters, this.data);
+      if (this.isDataValid && this.isParametersValid) {
+        this.result = this.predictionStore.predict(
+          'movingAverage',
+          this.parameters,
+          this.data
+        );
       }
     },
-
-    isDataValid() {
-      return this.data.history.length > 0
-        && this.data.buyOrders.length > 0
-        && this.data.sellOrders.length > 0;
-    }
   },
 };
 </script>
 
 <template>
   <div>
+    <div>
+      Long period for moving average in days:
+    </div>
+
+    <div>
+      <input v-model="parameters.longPeriod" type="number" min="1" max="360">
+    </div>
+
+    <div>
+      Short period for moving average in days:
+    </div>
+
+    <div>
+      <input v-model="parameters.shortPeriod" type="number" min="1" max="360">
+    </div>
+
     <button @click="performPrediction">
       Perform prediction
     </button>
