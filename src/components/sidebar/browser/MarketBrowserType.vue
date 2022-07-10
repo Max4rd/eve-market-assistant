@@ -35,7 +35,12 @@ export default {
 
   methods: {
     getImageSource() {
-      this.image = this.imageStore.buildImageSourceUrl('types', this.marketType.typeID, 'icon', 32)
+      this.image = this.imageStore.buildImageSourceUrl(
+        'types',
+        this.marketType.typeID,
+        'icon',
+        32
+      );
     },
 
     selectItem() {

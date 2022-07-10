@@ -38,7 +38,7 @@ export default {
 
 <template>
   <div>
-    <DetailsInfo/>
+    <DetailsInfo :selected-item="selectedItem"/>
 
     <DetailsTabs @changeTab="handleChangeTab"/>
 
