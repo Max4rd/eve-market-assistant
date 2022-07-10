@@ -40,7 +40,10 @@ export default {
   <div>
     <DetailsInfo :selected-item="selectedItem"/>
 
-    <DetailsTabs @changeTab="handleChangeTab"/>
+    <DetailsTabs
+        :selected="selectedTab"
+        @changeTab="handleChangeTab"
+    />
 
     <DetailsData
         v-show="selectedTab === 'data'"

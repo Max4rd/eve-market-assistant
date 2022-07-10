@@ -76,10 +76,14 @@ export default {
 
 <template>
   <div>
-    <table>
+    <table class="border-collapse">
       <thead>
         <tr>
-          <th v-for="head in heads" :key="head.id">
+          <th
+              v-for="head in heads"
+              :key="head.id"
+              class="px-2 border border-b-gray-400"
+          >
             {{ head.name }}
           </th>
         </tr>

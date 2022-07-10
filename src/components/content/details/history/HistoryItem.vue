@@ -17,7 +17,11 @@ export default {
 
 <template>
   <tr>
-    <td v-for="column in head" :key="column.id">
+    <td
+        v-for="column in head"
+        :key="column.id"
+        class="px-2 border border-b-gray-400"
+    >
       {{ formatItemData(column.name, column.field) }}
     </td>
   </tr>
