@@ -38,6 +38,24 @@ export default {
     isParametersValid() {
       return this.parameters.longPeriod > this.parameters.shortPeriod;
     },
+
+    formattedResult() {
+      if (this.result >= 0 && this.result < 0.7) {
+        return 'strong drop';
+      } else if (this.result >= 0.8 && this.result < 0.95) {
+        return 'drop';
+      } else if (this.result >= 0.95 && this.result < 1.05) {
+        return 'stable';
+      } else if (this.result >= 1.05 && this.result < 1.2) {
+        return 'rise';
+      } else {
+        return 'strong rise';
+      }
+    },
+
+    roundedResult() {
+      return Math.round(this.result * 100) / 100;
+    },
   },
 
   watch: {
@@ -138,7 +156,7 @@ export default {
     </button>
 
     <div v-show="result">
-      Result: {{ result }}
+      Result: {{ formattedResult }} ({{ roundedResult }})
     </div>
   </div>
 </template>
