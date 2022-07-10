@@ -21,8 +21,8 @@ export default {
     return {
       orders: [],
       ordered: [],
-      sortField: 'price',
-      ascending: true,
+      sortField: '',
+      ascending: null,
     };
   },
 
@@ -37,9 +37,17 @@ export default {
     typeId() {
       this.fetchOrders();
     },
+    sortField() {
+      this.sortOrders();
+    },
+    ascending() {
+      this.sortOrders();
+    },
   },
 
   created() {
+    this.sortField = this.defaultSortField;
+    this.ascending = this.defaultSortAscending;
     this.fetchOrders();
   },
 
@@ -64,6 +72,14 @@ export default {
         }
       });
     },
+
+    handleNewSort(fields) {
+      if (this.sortField === fields[0]) {
+        this.ascending = !this.ascending;
+      } else {
+        this.sortField = fields[0];
+      }
+    },
   },
 };
 </script>
@@ -76,6 +92,7 @@ export default {
           <th
               v-for="head in tableHead"
               :key="head.id"
+              @click="handleNewSort(head.fields)"
               class="px-2 border border-b-gray-400"
           >
             {{ head.name }}

@@ -27,7 +27,7 @@ export default {
           fields: ['location_id', 'system_id'],
         },
         {
-          name: 'Expires in',
+          name: 'Issued on',
           fields: ['issued', 'duration'],
         },
       ],
@@ -53,7 +53,7 @@ export default {
           fields: ['min_volume'],
         },
         {
-          name: 'Expires in',
+          name: 'Issued on',
           fields: ['issued', 'duration'],
         },
       ],
@@ -73,6 +73,8 @@ export default {
         :type-id="selectedItem?.typeID"
         order-type="buy"
         :table-head="buyerTableHead"
+        default-sort-field="price"
+        :default-sort-ascending="false"
     />
 
     <div>
@@ -84,6 +86,8 @@ export default {
         :type-id="selectedItem?.typeID"
         order-type="sell"
         :table-head="sellerTableHead"
+        default-sort-field="price"
+        :default-sort-ascending="true"
     />
   </div>
 </template>
