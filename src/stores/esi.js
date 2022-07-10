@@ -15,5 +15,10 @@ export const useEsiStore = defineStore('esi', {
       url += `?type_id=${typeId}`;
       return fetch(url);
     },
+
+    searchItem(searchString) {
+      const url = esiUrl + `/search/?categories=inventory_type&search=${searchString}`;
+      return fetch(url);
+    }
   },
 });
