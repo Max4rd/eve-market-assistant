@@ -30,13 +30,12 @@ export default {
   },
 
   created() {
-    // this.fetchImage();
+    this.getImageSource();
   },
 
   methods: {
-    fetchImage() {
-      this.imageStore.fetchImage('types', this.marketType.typeID, 'icon', 32)
-        .then(response => console.log(response));
+    getImageSource() {
+      this.image = this.imageStore.buildImageSourceUrl('types', this.marketType.typeID, 'icon', 32)
     },
 
     selectItem() {

@@ -14,7 +14,15 @@ export const useImageStore = defineStore('image', {
       if (size) {
         url += `?size=${size}`;
       }
-      return fetch(url);
+      return fetch(url, { mode: 'no-cors' });
+    },
+
+    buildImageSourceUrl(category, id, variation, size = null) {
+      let url = imageUrl + `/${category}/${id}/${variation}`;
+      if (size) {
+        url += `?size=${size}`;
+      }
+      return url;
     },
   },
 })
