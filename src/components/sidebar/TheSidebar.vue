@@ -1,19 +1,20 @@
 <script>
-import { mapStores } from 'pinia';
-import { useEsiStore } from '@/stores/esi';
-import SidebarHeader from '@/components/sidebar/SidebarHeader'
+// import { mapStores } from 'pinia';
+// import { useEsiStore } from '@/stores/esi';
+// import SidebarHeader from '@/components/sidebar/SidebarHeader'
 import MarketBrowser from '@/components/sidebar/browser/MarketBrowser'
-import MarketSearch from '@/components/sidebar/browser/MarketSearch';
+// import MarketSearch from '@/components/sidebar/browser/MarketSearch';
 
 export default {
   name: 'TheSidebar',
 
   components: {
-    SidebarHeader,
+    // SidebarHeader,
     MarketBrowser,
-    MarketSearch,
+    // MarketSearch,
   },
 
+  /*
   data() {
     return {
       searchString: '',
@@ -42,19 +43,24 @@ export default {
         });
     }
   },
+  */
 }
 </script>
 
 <template>
   <nav>
+    <!--
     <SidebarHeader
         :modelValue="searchString"
         @update:modelValue="newValue => searchString = newValue"
         @search="handleSearch"
     />
+    -->
 
     <MarketBrowser/>
 
+    <!--
     <MarketSearch/>
+    -->
   </nav>
 </template>

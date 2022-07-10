@@ -19,7 +19,7 @@ export default {
   </div>
 
   <div class="flex flex-row">
-    <TheSidebar class="w-1/3"/>
-    <TheContent class="w-2/3"/>
+    <TheSidebar class="w-1/4"/>
+    <TheContent class="w-3/4"/>
   </div>
 </template>

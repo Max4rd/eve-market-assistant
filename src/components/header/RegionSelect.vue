@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       regions: [],
-      selected: '',
+      selected: 'The Forge',
     }
   },
 
