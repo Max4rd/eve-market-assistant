@@ -23,6 +23,10 @@ export default {
         ? this.selectedItem.typeName
         : 'No item selected';
     },
+
+    itemDescription() {
+      return this.selectedItem?.description;
+    }
   },
 
   watch: {
@@ -38,7 +42,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-row">
     <div>
       <img
           v-show="imageSource !== ''"
@@ -47,7 +51,13 @@ export default {
     </div>
 
     <div>
-      {{ itemName }}
+      <div>
+        {{ itemName }}
+      </div>
+
+      <div>
+        {{ itemDescription }}
+      </div>
     </div>
   </div>
 </template>

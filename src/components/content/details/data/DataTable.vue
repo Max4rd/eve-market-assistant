@@ -13,11 +13,16 @@ export default {
     typeId: Number,
     orderType: String,
     tableHead: Object,
+    defaultSortField: String,
+    defaultSortAscending: Boolean,
   },
 
   data() {
     return {
       orders: [],
+      ordered: [],
+      sortField: 'price',
+      ascending: true,
     };
   },
 
@@ -45,8 +50,19 @@ export default {
           .then(response => response.json())
           .then(data => {
             this.orders = data;
+            this.sortOrders();
           });
       }
+    },
+
+    sortOrders() {
+      this.ordered = [...this.orders].sort((a, b) => {
+        if (this.ascending) {
+          return a[this.sortField] - b[this.sortField];
+        } else {
+          return b[this.sortField] - a[this.sortField];
+        }
+      });
     },
   },
 };
@@ -54,10 +70,14 @@ export default {
 
 <template>
   <div>
-    <table>
+    <table class="border-collapse">
       <thead>
         <tr>
-          <th v-for="head in tableHead" :key="head.id">
+          <th
+              v-for="head in tableHead"
+              :key="head.id"
+              class="px-2 border border-b-gray-400"
+          >
             {{ head.name }}
           </th>
         </tr>
@@ -65,10 +85,11 @@ export default {
 
       <tbody>
         <DataItem
-            v-for="order in orders"
+            v-for="order in ordered"
             :key="order.id"
             :head="tableHead"
-            :item="order"/>
+            :item="order"
+        />
       </tbody>
     </table>
   </div>
