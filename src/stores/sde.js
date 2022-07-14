@@ -25,5 +25,11 @@ export const useSdeStore = defineStore('sde', {
       const url = emaSdeUrl + '/region';
       return fetch(url);
     },
+
+    // Search route
+    fetchSearchItem(searchString) {
+      const url = emaSdeUrl + `/search/item?string=${searchString}`;
+      return fetch(url);
+    },
   },
 });

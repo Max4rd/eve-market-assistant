@@ -1,10 +1,6 @@
 <script>
-import { BackspaceIcon } from '@heroicons/vue/outline';
-
 export default {
   name: 'SidebarHeader',
-
-  components: { BackspaceIcon },
 
   props: {
     modelValue: String,
@@ -23,18 +19,16 @@ export default {
       <input
           :value="modelValue"
           @input="$emit('update:modelValue', $event.target.value)"
+          type="search"
           class="w-full"
       >
     </div>
 
-    <div v-show="modelValue.length > 0">
-      <button @click="$emit('update:modelValue', '')">
-        <BackspaceIcon class="h-6 w-6 text-black"/>
-      </button>
-    </div>
-
     <div>
-      <button @click="$emit('search')">
+      <button
+          @click="$emit('search')"
+          :disabled="modelValue === ''"
+      >
         Search
       </button>
     </div>

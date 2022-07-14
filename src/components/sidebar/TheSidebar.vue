@@ -1,20 +1,19 @@
 <script>
-// import { mapStores } from 'pinia';
-// import { useEsiStore } from '@/stores/esi';
-// import SidebarHeader from '@/components/sidebar/SidebarHeader'
+import { mapStores } from 'pinia';
+import { useSdeStore } from '@/stores/sde';
+import SidebarHeader from '@/components/sidebar/SidebarHeader'
 import MarketBrowser from '@/components/sidebar/browser/MarketBrowser'
-// import MarketSearch from '@/components/sidebar/browser/MarketSearch';
+import MarketSearch from '@/components/sidebar/browser/MarketSearch';
 
 export default {
   name: 'TheSidebar',
 
   components: {
-    // SidebarHeader,
+    SidebarHeader,
     MarketBrowser,
-    // MarketSearch,
+    MarketSearch,
   },
 
-  /*
   data() {
     return {
       searchString: '',
@@ -23,7 +22,7 @@ export default {
   },
 
   computed: {
-    ...mapStores(useEsiStore),
+    ...mapStores(useSdeStore),
   },
 
   watch: {
@@ -36,31 +35,29 @@ export default {
 
   methods: {
     handleSearch() {
-      this.esiStore.searchItem(this.searchString)
+      this.sdeStore.fetchSearchItem(this.searchString)
         .then(response => response.json())
         .then(data => {
-          console.log(data);
+          this.searchResult = data.data;
         });
     }
   },
-  */
 }
 </script>
 
 <template>
   <nav>
-    <!--
     <SidebarHeader
         :modelValue="searchString"
         @update:modelValue="newValue => searchString = newValue"
         @search="handleSearch"
     />
-    -->
 
-    <MarketBrowser/>
+    <MarketBrowser v-show="searchString === ''"/>
 
-    <!--
-    <MarketSearch/>
-    -->
+    <MarketSearch
+        v-show="searchString !== ''"
+        :searchResult="searchResult"
+    />
   </nav>
 </template>
