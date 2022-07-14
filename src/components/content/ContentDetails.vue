@@ -11,7 +11,13 @@ import DetailsPrediction from '@/components/content/details/DetailsPrediction';
 export default {
   name: 'ContentDetails',
 
-  components: { DetailsPrediction, DetailsHistory, DetailsData, DetailsTabs, DetailsInfo },
+  components: {
+    DetailsInfo,
+    DetailsTabs,
+    DetailsData,
+    DetailsHistory,
+    DetailsPrediction,
+  },
 
   data() {
     return {
