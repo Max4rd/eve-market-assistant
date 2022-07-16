@@ -3,10 +3,10 @@ import { mapStores } from 'pinia';
 import { useImageStore } from '@/stores/image';
 
 export default {
-  name: 'DetailsInfo',
+  name: 'GroupsItem',
 
   props: {
-    selectedItem: Object,
+    item: Object,
   },
 
   data() {
@@ -17,19 +17,23 @@ export default {
 
   computed: {
     ...mapStores(useImageStore),
-
-    itemName() {
-      return this.selectedItem
-        ? this.selectedItem.typeName
-        : 'No item selected';
-    },
   },
 
   watch: {
-    selectedItem() {
+    item() {
+      this.buildImageSource();
+    },
+  },
+
+  created() {
+    this.buildImageSource();
+  },
+
+  methods: {
+    buildImageSource() {
       this.imageSource = this.imageStore.buildImageSourceUrl(
         'types',
-        this.selectedItem.typeID,
+        this.item.typeID,
         'icon'
       );
     },
@@ -38,18 +42,20 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-row">
-    <div>
-      <img
-          v-show="imageSource !== ''"
-          :src="imageSource"
-      >
-    </div>
+  <li class="flex flex-row">
+    <img
+        :src="imageSource"
+        class="w-16 h-16"
+    >
 
     <div>
       <div>
-        {{ itemName }}
+        {{ item.typeName }}
+      </div>
+
+      <div class="whitespace-pre-line">
+        {{ item.description }}
       </div>
     </div>
-  </div>
+  </li>
 </template>
