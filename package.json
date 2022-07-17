@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.6",
+    "chart.js": "^3.8.0",
     "core-js": "^3.8.3",
     "pinia": "^2.0.14",
     "vue": "^3.2.13",
+    "vue-chartjs": "^4.1.1",
     "vue-router": "^4.0.15"
   },
   "devDependencies": {
