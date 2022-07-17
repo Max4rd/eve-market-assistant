@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       regions: [],
-      selected: 'The Forge',
+      selected: '',
     }
   },
 
@@ -19,13 +19,17 @@ export default {
 
   watch: {
     selected(newSelected) {
-      this.regionStore.selected = this.regions
+      const regionItem = this.regions
         .find(region => region.regionName === newSelected);
+      if (regionItem) {
+        this.regionStore.store(regionItem);
+      }
     },
   },
 
   created() {
     this.fetchRegions();
+    this.selected = this.regionStore.show.regionName;
   },
 
   methods: {
