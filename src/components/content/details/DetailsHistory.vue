@@ -1,4 +1,6 @@
 <script>
+import { mapStores } from 'pinia';
+import { useEsiStore } from '@/stores/esi';
 import HistoryTable from '@/components/content/details/history/HistoryTable';
 import HistoryGraph from '@/components/content/details/history/HistoryGraph';
 
@@ -15,14 +17,42 @@ export default {
   data() {
     return {
       showGraph: true,
+      statistics: [],
     };
   },
 
   computed: {
-    toggle() {
+    ...mapStores(useEsiStore),
+
+    nextView() {
       return this.showGraph
         ? 'Table'
         : 'Graph';
+    },
+  },
+
+  watch: {
+    selectedRegion() {
+      this.fetchStatistics();
+    },
+    selectedItem() {
+      this.fetchStatistics();
+    },
+  },
+
+  created() {
+    this.fetchStatistics();
+  },
+
+  methods: {
+    fetchStatistics() {
+      if (this.selectedRegion?.regionID && this.selectedItem?.typeID) {
+        this.esiStore.fetchMarketHistory(this.selectedRegion.regionID,this.selectedItem.typeID)
+          .then(response => response.json())
+          .then(data => {
+            this.statistics = data;
+          });
+      }
     },
   },
 };
@@ -32,16 +62,16 @@ export default {
   <div>
     <HistoryGraph
         v-show="showGraph"
+        :statistics="statistics"
     />
 
     <HistoryTable
         v-show="!showGraph"
-        :region-id="selectedRegion?.regionID"
-        :type-id="selectedItem?.typeID"
+        :statistics="statistics"
     />
 
     <button @click="showGraph = !showGraph">
-      Show {{ toggle }}
+      Show {{ nextView }}
     </button>
   </div>
 </template>

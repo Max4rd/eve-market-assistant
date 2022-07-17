@@ -1,19 +1,17 @@
 <script>
-import { mapStores } from 'pinia';
-import { useEsiStore } from '@/stores/esi';
 import HistoryItem from '@/components/content/details/history/HistoryItem';
 
 export default {
   name: 'HistoryTable',
+
   components: { HistoryItem },
+
   props: {
-    regionId: Number,
-    typeId: Number,
+    statistics: Array,
   },
 
   data() {
     return {
-      statistics: [],
       heads: [
         {
           name: 'Date',
@@ -41,35 +39,6 @@ export default {
         },
       ],
     };
-  },
-
-  computed: {
-    ...mapStores(useEsiStore),
-  },
-
-  watch: {
-    regionId() {
-      this.fetchStatistics();
-    },
-    typeId() {
-      this.fetchStatistics();
-    },
-  },
-
-  created() {
-    this.fetchStatistics();
-  },
-
-  methods: {
-    fetchStatistics() {
-      if (this.regionId && this.typeId) {
-        this.esiStore.fetchMarketHistory(this.regionId, this.typeId)
-          .then(response => response.json())
-          .then(data => {
-            this.statistics = data;
-          });
-      }
-    },
   },
 };
 </script>
