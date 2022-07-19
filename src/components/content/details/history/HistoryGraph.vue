@@ -1,73 +1,78 @@
 <script>
-import { Bar } from 'vue-chartjs';
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale} from 'chart.js';
+import { Line } from 'vue-chartjs';
+import { Chart, registerables } from 'chart.js';
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+Chart.register(...registerables);
 
 export default {
   name: 'HistoryGraph',
 
-  components: { Bar },
+  components: { Line },
 
   props: {
     statistics: Array,
-
-    chartId: {
-      type: String,
-      default: 'bar-chart'
-    },
-    datasetIdKey: {
-      type: String,
-      default: 'label'
-    },
-    width: {
-      type: Number,
-      default: 400
-    },
-    height: {
-      type: Number,
-      default: 400
-    },
-    cssClasses: {
-      default: '',
-      type: String
-    },
-    styles: {
-      type: Object,
-      default: () => {}
-    },
-    plugins: {
-      type: Object,
-      default: () => {}
-    }
   },
 
   data() {
     return {
-      chartData: {
-        labels: [ 'January', 'February', 'March' ],
-        datasets: [ { data: [40, 20, 12] } ]
-      },
-      chartOptions: {
-        responsive: true
-      }
+      chartData: {},
     };
+  },
+
+  computed: {
+    dataLabels() {
+      return this.statistics.slice(-10).map(stat => stat.date);
+    },
+    dataAverage() {
+      return this.statistics.slice(-10).map(stat => stat.average);
+    },
+    dataHigh() {
+      return this.statistics.slice(-10).map(stat => stat.highest);
+    },
+    dataLow() {
+      return this.statistics.slice(-10).map(stat => stat.lowest);
+    },
+  },
+
+  watch: {
+    statistics() {
+      this.updateChart();
+    },
+  },
+
+  created() {
+    this.updateChart();
+  },
+
+  methods: {
+    updateChart() {
+      this.chartData = {
+        labels: this.dataLabels,
+        datasets: [
+          {
+            label: 'Average',
+            data: this.dataAverage,
+          },
+          {
+            label: 'High',
+            data: this.dataHigh,
+          },
+          {
+            label: 'Low',
+            data: this.dataLow,
+          },
+        ],
+      };
+    },
   },
 };
 </script>
 
 <template>
   <div>
-    <Bar
-        :chart-options="chartOptions"
+    <Line
         :chart-data="chartData"
-        :chart-id="chartId"
-        :dataset-id-key="datasetIdKey"
-        :plugins="plugins"
-        :css-classes="cssClasses"
-        :styles="styles"
-        :width="width"
-        :height="height"
+
     />
   </div>
 </template>
