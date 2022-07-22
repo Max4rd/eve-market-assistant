@@ -18,6 +18,33 @@ export default {
     return {
       showGraph: true,
       statistics: [],
+      selectedPeriod: 90,
+      periodOptions: [
+        {
+          label: '5 days',
+          value: 5,
+        },
+        {
+          label: '10 days',
+          value: 10,
+        },
+        {
+          label: '1 month',
+          value: 30,
+        },
+        {
+          label: '3 months',
+          value: 90,
+        },
+        {
+          label: '6 months',
+          value: 180,
+        },
+        {
+          label: '1 year',
+          value: 365,
+        },
+      ],
     };
   },
 
@@ -63,15 +90,31 @@ export default {
     <HistoryGraph
         v-show="showGraph"
         :statistics="statistics"
+        :period="selectedPeriod.value"
     />
 
     <HistoryTable
         v-show="!showGraph"
         :statistics="statistics"
+        :period="selectedPeriod.value"
     />
 
-    <button @click="showGraph = !showGraph">
-      Show {{ nextView }}
-    </button>
+    <div>
+      <button @click="showGraph = !showGraph">
+        Show {{ nextView }}
+      </button>
+
+      <select v-model="selectedPeriod">
+        <option
+            v-for="option in periodOptions"
+            :key="option.id"
+            :value="option.value"
+        >
+          {{ option.label }}
+        </option>
+      </select>
+
+      <div>{{ selectedPeriod }}</div>
+    </div>
   </div>
 </template>

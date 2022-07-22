@@ -11,6 +11,7 @@ export default {
 
   props: {
     statistics: Array,
+    period: Number,
   },
 
   data() {
@@ -38,6 +39,9 @@ export default {
     statistics() {
       this.updateChart();
     },
+    period() {
+      this.updateChart();
+    },
   },
 
   created() {
@@ -52,6 +56,8 @@ export default {
           {
             label: 'Average',
             data: this.dataAverage,
+            backgroundColor: ['rgb(255, 0, 0)'],
+            borderColor: ['rgb(255, 0, 0)'],
           },
           {
             label: 'High',
@@ -72,7 +78,6 @@ export default {
   <div>
     <Line
         :chart-data="chartData"
-
     />
   </div>
 </template>

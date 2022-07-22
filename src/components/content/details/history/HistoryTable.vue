@@ -8,6 +8,7 @@ export default {
 
   props: {
     statistics: Array,
+    period: Number,
   },
 
   data() {
