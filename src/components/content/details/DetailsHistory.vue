@@ -90,13 +90,13 @@ export default {
     <HistoryGraph
         v-show="showGraph"
         :statistics="statistics"
-        :period="selectedPeriod.value"
+        :period="selectedPeriod"
     />
 
     <HistoryTable
         v-show="!showGraph"
         :statistics="statistics"
-        :period="selectedPeriod.value"
+        :period="selectedPeriod"
     />
 
     <div>

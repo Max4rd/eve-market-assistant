@@ -17,21 +17,42 @@ export default {
   data() {
     return {
       chartData: {},
+      chartOptions: {
+        scales: {
+          priceScale: {
+            type: 'linear',
+            position: 'left',
+          },
+          volumeScale: {
+            type: 'linear',
+            position: 'right',
+            grace: '500%',
+            grid: { display: false },
+          },
+        },
+      },
     };
   },
 
   computed: {
-    dataLabels() {
-      return this.statistics.slice(-10).map(stat => stat.date);
+    dataLabel() {
+      return this.statistics
+        .slice(-this.period)
+        .map(stat => stat.date);
     },
     dataAverage() {
-      return this.statistics.slice(-10).map(stat => stat.average);
+      return this.statistics
+        .slice(-this.period)
+        .map(stat => stat.average);
     },
-    dataHigh() {
-      return this.statistics.slice(-10).map(stat => stat.highest);
+    dataVolume() {
+      return this.statistics
+        .slice(-this.period)
+        .map(stat => stat.volume);
     },
-    dataLow() {
-      return this.statistics.slice(-10).map(stat => stat.lowest);
+    dataDonchianTop() {
+    },
+    dataDonchianBot() {
     },
   },
 
@@ -51,21 +72,21 @@ export default {
   methods: {
     updateChart() {
       this.chartData = {
-        labels: this.dataLabels,
+        labels: this.dataLabel,
         datasets: [
           {
-            label: 'Average',
+            label: 'Median',
             data: this.dataAverage,
-            backgroundColor: ['rgb(255, 0, 0)'],
-            borderColor: ['rgb(255, 0, 0)'],
+            backgroundColor: 'rgba(255,191,0,1.0)',
+            showLine: false,
+            yAxisID: 'priceScale',
           },
           {
-            label: 'High',
-            data: this.dataHigh,
-          },
-          {
-            label: 'Low',
-            data: this.dataLow,
+            type: 'bar',
+            label: 'Volume',
+            data: this.dataVolume,
+            backgroundColor: 'rgb(0,191,255,1.0)',
+            yAxisID: 'volumeScale',
           },
         ],
       };
@@ -77,6 +98,7 @@ export default {
 <template>
   <div>
     <Line
+        :chart-options="chartOptions"
         :chart-data="chartData"
     />
   </div>
