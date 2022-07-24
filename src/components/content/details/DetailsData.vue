@@ -13,7 +13,7 @@ export default {
 
   data() {
     return {
-      buyerTableHead: [
+      sellerTableHead: [
         {
           name: 'Quantity',
           fields: ['volume_remain'],
@@ -31,7 +31,7 @@ export default {
           fields: ['issued', 'duration'],
         },
       ],
-      sellerTableHead: [
+      buyerTableHead: [
         {
           name: 'Quantity',
           fields: ['volume_remain'],
@@ -65,22 +65,8 @@ export default {
 <template>
   <div>
     <div>
-      Buyers
-    </div>
-
-    <DataTable
-        :region-id="selectedRegion?.regionID"
-        :type-id="selectedItem?.typeID"
-        order-type="buy"
-        :table-head="buyerTableHead"
-        default-sort-field="price"
-        :default-sort-ascending="false"
-    />
-
-    <div>
       Sellers
     </div>
-
     <DataTable
         :region-id="selectedRegion?.regionID"
         :type-id="selectedItem?.typeID"
@@ -88,6 +74,18 @@ export default {
         :table-head="sellerTableHead"
         default-sort-field="price"
         :default-sort-ascending="true"
+    />
+
+    <div>
+      Buyers
+    </div>
+    <DataTable
+        :region-id="selectedRegion?.regionID"
+        :type-id="selectedItem?.typeID"
+        order-type="buy"
+        :table-head="buyerTableHead"
+        default-sort-field="price"
+        :default-sort-ascending="false"
     />
   </div>
 </template>
