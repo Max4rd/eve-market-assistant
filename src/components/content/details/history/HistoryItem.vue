@@ -9,7 +9,19 @@ export default {
 
   methods: {
     formatItemData(name, field) {
-      return this.item[field];
+      const value = this.item[field];
+      if (['lowest', 'highest', 'average'].includes(field)) {
+        const formattedNumber = new Intl.NumberFormat('en-US').format(value);
+        return formattedNumber + ' ISK';
+      } else if (['order_count', 'volume'].includes(field)) {
+        return new Intl.NumberFormat('en-US').format(value);
+      } else {
+        const date = new Date(value);
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const day = date.getDate();
+        return `${year}.${month + 1}.${day}`;
+      }
     },
   },
 };
