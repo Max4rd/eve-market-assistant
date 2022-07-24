@@ -1,10 +1,23 @@
 <script>
+import { mapStores } from 'pinia';
+import { useEsiStore } from '@/stores/esi';
+
 export default {
   name: 'DataItem',
 
   props: {
     head: Object,
     item: Object,
+  },
+
+  data() {
+    return {
+      location: '',
+    };
+  },
+
+  computed: {
+    ...mapStores(useEsiStore),
   },
 
   methods: {
@@ -35,8 +48,20 @@ export default {
 
     formatLocation(fieldLocation, fieldSystem) {
       const locationId = this.item[fieldLocation];
-      const systemId = this.item[fieldSystem];
-      return locationId;
+      if (locationId >= 60000000 && locationId < 61000000) {
+        this.esiStore.fetchUniverseStation(locationId)
+          .then(response => response.json())
+          .then((data) => {
+            this.location = data.name;
+          });
+      } else {
+        const systemId = this.item[fieldSystem];
+        this.esiStore.fetchUniverseSystem(systemId)
+          .then(response => response.json())
+          .then((data) => {
+            this.location = `Private structure in ${data.name}`;
+          });
+      }
     },
 
     formatExpiry(fieldIssued, fieldDuration) {
@@ -66,7 +91,7 @@ export default {
         :key="column.id"
         class="px-2 border border-b-gray-400"
     >
-      {{ formatItemData(column.name, column.fields) }}
+      {{ formatItemData(column.name, column.fields) ?? this.location }}
     </td>
   </tr>
 </template>
