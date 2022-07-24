@@ -13,7 +13,7 @@ export default {
     typeId: Number,
     orderType: String,
     tableHead: Object,
-    defaultSortField: String,
+    defaultSortField: Array,
     defaultSortAscending: Boolean,
   },
 
@@ -21,7 +21,7 @@ export default {
     return {
       orders: [],
       ordered: [],
-      sortField: '',
+      sortFields: [],
       ascending: null,
     };
   },
@@ -46,7 +46,7 @@ export default {
   },
 
   created() {
-    this.sortField = this.defaultSortField;
+    this.sortFields = this.defaultSortField;
     this.ascending = this.defaultSortAscending;
     this.fetchOrders();
   },
@@ -64,20 +64,53 @@ export default {
     },
 
     sortOrders() {
-      this.ordered = [...this.orders].sort((a, b) => {
+      const field = this.sortFields[0];
+      if (field === 'range') {
+        this.ordered = this.rangeSort();
+      } else if (field === 'issued') {
+        this.ordered = this.expirySort();
+      } else {
+        this.ordered = this.numericSort();
+      }
+    },
+
+    numericSort() {
+      const field = this.sortFields[0];
+      return [...this.orders].sort((a, b) => {
         if (this.ascending) {
-          return a[this.sortField] - b[this.sortField];
+          return a[field] - b[field];
         } else {
-          return b[this.sortField] - a[this.sortField];
+          return b[field] - a[field];
         }
       });
     },
 
+    rangeSort() {
+      const orderedRanges = [
+        'station', 'solarsystem',
+        '1', '2', '3', '4', '5',
+        '10', '20', '30', '40',
+        'region',
+      ];
+      const field = this.sortFields[0];
+      return [...this.orders].sort((a, b) => {
+        const rangeA = orderedRanges.indexOf(a[field]);
+        const rangeB = orderedRanges.indexOf(b[field]);
+        if (this.ascending) {
+          return rangeA - rangeB;
+        } else {
+          return rangeB - rangeA;
+        }
+      });
+    },
+
+    expirySort() {},
+
     handleNewSort(fields) {
-      if (this.sortField === fields[0]) {
+      if (this.sortFields === fields) {
         this.ascending = !this.ascending;
       } else {
-        this.sortField = fields[0];
+        this.sortFields = fields;
       }
     },
   },

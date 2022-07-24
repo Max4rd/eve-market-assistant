@@ -72,7 +72,7 @@ export default {
         :type-id="selectedItem?.typeID"
         order-type="sell"
         :table-head="sellerTableHead"
-        default-sort-field="price"
+        :default-sort-field="['price']"
         :default-sort-ascending="true"
     />
 
@@ -84,7 +84,7 @@ export default {
         :type-id="selectedItem?.typeID"
         order-type="buy"
         :table-head="buyerTableHead"
-        default-sort-field="price"
+        :default-sort-field="['price']"
         :default-sort-ascending="false"
     />
   </div>
