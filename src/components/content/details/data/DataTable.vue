@@ -104,7 +104,25 @@ export default {
       });
     },
 
-    expirySort() {},
+    expirySort() {
+      return [...this.orders].sort((a, b) => {
+        const issueDateA = new Date(a['issued']);
+        const issueDateB = new Date(b['issued']);
+        const expiryDateA = this.addDays(issueDateA, a['duration']);
+        const expiryDateB = this.addDays(issueDateB, b['duration']);
+        if (this.ascending) {
+          return expiryDateA - expiryDateB;
+        } else {
+          return expiryDateB - expiryDateA;
+        }
+      });
+    },
+
+    addDays(date, days) {
+      const result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+    },
 
     handleNewSort(fields) {
       if (this.sortFields === fields) {

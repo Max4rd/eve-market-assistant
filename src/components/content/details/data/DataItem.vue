@@ -9,8 +9,51 @@ export default {
 
   methods: {
     formatItemData(name, fields) {
-      const property = fields[0];
-      return this.item[property];
+      if (name === 'Price') {
+        return this.formatPrice(...fields);
+      } else if (name === 'Location') {
+        return this.formatLocation(...fields);
+      } else if (name === 'Expires on') {
+        return this.formatExpiry(...fields);
+      } else if (name === 'Range') {
+        return this.formatRange(...fields);
+      } else {
+        return this.formatNumber(...fields);
+      }
+    },
+
+    formatNumber(field) {
+      const value = this.item[field];
+      return new Intl.NumberFormat('en-US').format(value);
+    },
+
+    formatPrice(field) {
+      const value = this.item[field];
+      const formattedNumber = new Intl.NumberFormat('en-US').format(value);
+      return formattedNumber + ' ISK';
+    },
+
+    formatLocation(fieldLocation, fieldSystem) {
+      const locationId = this.item[fieldLocation];
+      const systemId = this.item[fieldSystem];
+      return locationId;
+    },
+
+    formatExpiry(fieldIssued, fieldDuration) {
+      const issued = new Date(this.item[fieldIssued]);
+      const expiry = this.addDays(issued, this.item[fieldDuration]);
+      return expiry.toLocaleString();
+    },
+
+    formatRange(field) {
+      const value = this.item[field];
+      return value;
+    },
+
+    addDays(date, days) {
+      const result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
     },
   },
 };

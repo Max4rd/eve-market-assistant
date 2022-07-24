@@ -27,7 +27,7 @@ export default {
           fields: ['location_id', 'system_id'],
         },
         {
-          name: 'Issued on',
+          name: 'Expires on',
           fields: ['issued', 'duration'],
         },
       ],
@@ -53,7 +53,7 @@ export default {
           fields: ['min_volume'],
         },
         {
-          name: 'Issued on',
+          name: 'Expires on',
           fields: ['issued', 'duration'],
         },
       ],

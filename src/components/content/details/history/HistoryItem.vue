@@ -11,17 +11,26 @@ export default {
     formatItemData(name, field) {
       const value = this.item[field];
       if (['lowest', 'highest', 'average'].includes(field)) {
-        const formattedNumber = new Intl.NumberFormat('en-US').format(value);
-        return formattedNumber + ' ISK';
+        return this.formatPrice(value);
       } else if (['order_count', 'volume'].includes(field)) {
-        return new Intl.NumberFormat('en-US').format(value);
+        return this.formatNumber(value);
       } else {
-        const date = new Date(value);
-        const year = date.getFullYear();
-        const month = date.getMonth();
-        const day = date.getDate();
-        return `${year}.${month + 1}.${day}`;
+        return this.formatDate(value);
       }
+    },
+
+    formatNumber(value) {
+      return new Intl.NumberFormat('en-US').format(value);
+    },
+
+    formatPrice(value) {
+      const formattedNumber = new Intl.NumberFormat('en-US').format(value);
+      return formattedNumber + ' ISK';
+    },
+
+    formatDate(value) {
+      const date = new Date(value);
+      return date.toLocaleDateString();
     },
   },
 };
