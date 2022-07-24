@@ -72,7 +72,13 @@ export default {
 
     formatRange(field) {
       const value = this.item[field];
-      return value;
+      if (value === 'solarsystem') {
+        return 'Solar system';
+      } else if (value === 'station' || value === 'region') {
+        return value.charAt(0).toUpperCase() + value.slice(1);
+      } else {
+        return `${value} jump${value === '1' ? '' : 's'}`;
+      }
     },
 
     addDays(date, days) {
