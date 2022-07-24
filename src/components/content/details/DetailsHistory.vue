@@ -113,8 +113,6 @@ export default {
           {{ option.label }}
         </option>
       </select>
-
-      <div>{{ selectedPeriod }}</div>
     </div>
   </div>
 </template>
