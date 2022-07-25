@@ -49,9 +49,10 @@ export default {
         type="number"
         min="0"
         max="5"
+        class="ml-2 pl-2 border border-gray-400"
     >
 
-    <div>
+    <div class="ml-4">
       Broker Relation level:
     </div>
     <input
@@ -59,9 +60,13 @@ export default {
         type="number"
         min="0"
         max="5"
+        class="ml-2 pl-2 border border-gray-400"
     >
 
-    <button @click="resetValues">
+    <button
+        @click="resetValues"
+        class="ml-4 px-2 border border-gray-400"
+    >
       Reset skills
     </button>
   </div>

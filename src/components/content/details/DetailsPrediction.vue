@@ -80,12 +80,18 @@ export default {
 
     topPrice() {
       const value = this.data.buyOrders[0];
-      return this.formatPrice(value.price);
+      if (value) {
+        return this.formatPrice(value.price);
+      }
+      return '';
     },
 
     botPrice() {
       const value = this.data.sellOrders[0];
-      return this.formatPrice(value.price);
+      if (value) {
+        return this.formatPrice(value.price);
+      }
+      return '';
     },
   },
 

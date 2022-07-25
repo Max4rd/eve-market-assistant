@@ -13,9 +13,13 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-row items-center bg-gray-700 border-b-1 border-b-gray-400">
-    <RegionSelect class="m-2"/>
+  <div class="flex flex-row items-center border-b-1 border-b-gray-400">
+    <div class="ml-4 text-xl">
+      EVE Market Assistant
+    </div>
 
-    <SkillSelect/>
+    <RegionSelect class="ml-8 p-2"/>
+
+    <SkillSelect class="ml-8 p-2"/>
   </div>
 </template>

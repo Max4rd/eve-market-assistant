@@ -45,9 +45,19 @@ export default {
 </script>
 
 <template>
-  <div>
-    <select v-model="selected">
-      <option v-for="region in regions" :key="region.id">
+  <div class="flex flex-row">
+    <div>
+      Selected Region:
+    </div>
+
+    <select
+        v-model="selected"
+        class="ml-2 border border-gray-400"
+    >
+      <option
+          v-for="region in regions"
+          :key="region.id"
+      >
         {{ region.regionName }}
       </option>
     </select>

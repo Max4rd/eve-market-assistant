@@ -17,7 +17,7 @@ export const useSkillStore = defineStore('skill', {
       if (this.accounting) {
         return this.accounting;
       } else if (localStorage.getItem(tagAccounting)) {
-        this.accounting = localStorage.getItem(tagAccounting);
+        this.accounting = parseInt(localStorage.getItem(tagAccounting), 10);
         return this.accounting;
       } else {
         this.storeAccounting(0);
@@ -28,7 +28,7 @@ export const useSkillStore = defineStore('skill', {
       if (this.brokerRelation) {
         return this.brokerRelation;
       } else if (localStorage.getItem(tagBrokerRelation)) {
-        this.brokerRelation = localStorage.getItem(tagBrokerRelation);
+        this.brokerRelation = parseInt(localStorage.getItem(tagBrokerRelation), 10);
         return this.brokerRelation;
       } else {
         this.storeBrokerRelation(0);
