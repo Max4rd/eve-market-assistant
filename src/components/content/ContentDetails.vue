@@ -2,6 +2,7 @@
 import { mapState } from 'pinia';
 import { useRegionStore } from '@/stores/region';
 import { useItemStore } from '@/stores/item';
+import { useSkillStore } from '@/stores/skill';
 import DetailsInfo from '@/components/content/details/DetailsInfo';
 import DetailsTabs from '@/components/content/details/DetailsTabs';
 import DetailsData from '@/components/content/details/DetailsData';
@@ -32,6 +33,7 @@ export default {
     ...mapState(useItemStore, {
       selectedItem: 'selected',
     }),
+    ...mapState(useSkillStore, ['accounting', 'brokerRelation']),
   },
 
   methods: {
@@ -67,6 +69,8 @@ export default {
         v-show="selectedTab === 'prediction'"
         :selected-region="selectedRegion"
         :selected-item="selectedItem"
+        :accounting="accounting"
+        :broker-relation="brokerRelation"
     />
   </div>
 </template>

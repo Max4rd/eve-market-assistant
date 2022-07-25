@@ -9,6 +9,8 @@ export default {
   props: {
     selectedRegion: Object,
     selectedItem: Object,
+    accounting: Number,
+    brokerRelation: Number,
   },
 
   data() {
@@ -55,6 +57,16 @@ export default {
 
     roundedResult() {
       return Math.round(this.result * 100) / 100;
+    },
+
+    brokerFee() {
+      const result = 3 - 0.3 * this.brokerRelation
+      return Math.round(result * 100) / 100;
+    },
+
+    salesTax() {
+      const result = 8 - 0.88 * this.accounting;
+      return Math.round(result * 100) / 100;
     },
   },
 
@@ -136,18 +148,24 @@ export default {
 <template>
   <div>
     <div>
-      Long period for moving average in days:
+      Sales tax: {{ salesTax }}%
     </div>
 
     <div>
+      Broker's fee: {{ brokerFee }}%
+    </div>
+
+    <div>
+      Algorithm used: Moving Average
+    </div>
+
+    <div>
+      Long period for moving average in days:
       <input v-model="parameters.longPeriod" type="number" min="1" max="360">
     </div>
 
     <div>
       Short period for moving average in days:
-    </div>
-
-    <div>
       <input v-model="parameters.shortPeriod" type="number" min="1" max="360">
     </div>
 
