@@ -100,11 +100,17 @@ export default {
     />
 
     <div>
-      <button @click="showGraph = !showGraph">
+      <button
+          @click="showGraph = !showGraph"
+          class="px-2 border border-gray-400"
+      >
         Show {{ nextView }}
       </button>
 
-      <select v-model="selectedPeriod">
+      <select
+          v-model="selectedPeriod"
+          class="ml-2 border border-gray-400"
+      >
         <option
             v-for="option in periodOptions"
             :key="option.id"

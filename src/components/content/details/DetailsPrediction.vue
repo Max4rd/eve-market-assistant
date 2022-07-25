@@ -176,7 +176,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="p-4">
     <div>
       Sales tax: {{ salesTax }}%
     </div>
@@ -195,12 +195,18 @@ export default {
 
     <div>
       Expected taxes for order:
-      <input v-model="simulatedOrder" type="number" min="0" step="0.01">
+      <input
+          v-model="simulatedOrder"
+          type="number"
+          min="0"
+          step="0.01"
+          class="pl-2 border border-gray-400"
+      >
       ISK
     </div>
 
     <div>
-      {{ simulatedTaxes }}
+      Taxes: {{ simulatedTaxes }}
     </div>
 
     <div class="mt-4">
@@ -209,15 +215,30 @@ export default {
 
     <div>
       Long period for moving average in days:
-      <input v-model="parameters.longPeriod" type="number" min="1" max="360">
+      <input
+          v-model="parameters.longPeriod"
+          type="number"
+          min="1"
+          max="360"
+          class="pl-2 border border-gray-400"
+      >
     </div>
 
     <div>
       Short period for moving average in days:
-      <input v-model="parameters.shortPeriod" type="number" min="1" max="360">
+      <input
+          v-model="parameters.shortPeriod"
+          type="number"
+          min="1"
+          max="360"
+          class="pl-2 border border-gray-400"
+      >
     </div>
 
-    <button @click="performPrediction">
+    <button
+        @click="performPrediction"
+        class="px-2 border border-gray-400"
+    >
       Perform prediction
     </button>
 
