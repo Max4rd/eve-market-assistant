@@ -25,6 +25,7 @@ export default {
         shortPeriod: 1,
       },
       result: null,
+      simulatedOrder: 0,
     };
   },
 
@@ -67,6 +68,24 @@ export default {
     salesTax() {
       const result = 8 - 0.88 * this.accounting;
       return Math.round(result * 100) / 100;
+    },
+
+    simulatedTaxes() {
+      const sales = this.simulatedOrder * (this.salesTax/100);
+      const brokers = this.simulatedOrder * (this.brokerFee/100);
+      const total = sales + brokers;
+      const rounded = Math.round(total * 100) / 100;
+      return this.formatPrice(rounded);
+    },
+
+    topPrice() {
+      const value = this.data.buyOrders[0];
+      return this.formatPrice(value.price);
+    },
+
+    botPrice() {
+      const value = this.data.sellOrders[0];
+      return this.formatPrice(value.price);
     },
   },
 
@@ -141,6 +160,11 @@ export default {
         );
       }
     },
+
+    formatPrice(value) {
+      const formattedNumber = new Intl.NumberFormat('en-US').format(value);
+      return formattedNumber + ' ISK';
+    },
   },
 };
 </script>
@@ -156,6 +180,24 @@ export default {
     </div>
 
     <div>
+      Top buying price in region: {{ topPrice }}
+    </div>
+
+    <div>
+      Bot selling price in region: {{ botPrice }}
+    </div>
+
+    <div>
+      Expected taxes for order:
+      <input v-model="simulatedOrder" type="number" min="0" step="0.01">
+      ISK
+    </div>
+
+    <div>
+      {{ simulatedTaxes }}
+    </div>
+
+    <div class="mt-4">
       Algorithm used: Moving Average
     </div>
 
