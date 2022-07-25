@@ -64,7 +64,7 @@ export default {
 
 <template>
   <div>
-    <div>
+    <div class="ml-2 text-lg">
       Sellers
     </div>
     <DataTable
@@ -74,9 +74,10 @@ export default {
         :table-head="sellerTableHead"
         :default-sort-field="['price']"
         :default-sort-ascending="true"
+        class="mx-2 my-2"
     />
 
-    <div>
+    <div class="ml-2 text-lg">
       Buyers
     </div>
     <DataTable
@@ -86,6 +87,7 @@ export default {
         :table-head="buyerTableHead"
         :default-sort-field="['price']"
         :default-sort-ascending="false"
+        class="mx-2 my-2"
     />
   </div>
 </template>

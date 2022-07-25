@@ -42,14 +42,14 @@ export default {
 </script>
 
 <template>
-  <li class="flex flex-row">
+  <li class="flex flex-row mx-2 py-2">
     <img
         :src="imageSource"
         class="w-16 h-16"
     >
 
-    <div>
-      <div>
+    <div class="ml-2">
+      <div class="text-lg">
         {{ item.typeName }}
       </div>
 

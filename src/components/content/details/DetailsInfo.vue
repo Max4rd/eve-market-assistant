@@ -38,7 +38,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-row">
+  <div class="flex flex-row mx-2">
     <div>
       <img
           v-show="imageSource !== ''"
@@ -46,8 +46,8 @@ export default {
       >
     </div>
 
-    <div>
-      <div>
+    <div class="ml-2">
+      <div class="text-lg">
         {{ itemName }}
       </div>
     </div>

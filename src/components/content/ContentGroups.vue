@@ -49,7 +49,7 @@ export default {
       No item selected
     </div>
 
-    <ul v-else>
+    <ul v-else class="divide-y divide-gray-400">
       <GroupsItem
           v-for="item in groupItems"
           :key="item.id"

@@ -97,9 +97,10 @@ export default {
         v-show="!showGraph"
         :statistics="statistics"
         :period="selectedPeriod"
+        class="mx-2 my-2"
     />
 
-    <div>
+    <div class="mx-2 my-2">
       <button
           @click="showGraph = !showGraph"
           class="px-2 border border-gray-400"
