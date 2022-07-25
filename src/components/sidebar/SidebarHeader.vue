@@ -20,7 +20,7 @@ export default {
           :value="modelValue"
           @input="$emit('update:modelValue', $event.target.value)"
           type="search"
-          class="w-full"
+          class="w-full ml-2 border border-gray-400"
       >
     </div>
 
@@ -28,6 +28,7 @@ export default {
       <button
           @click="$emit('search')"
           :disabled="modelValue === ''"
+          class="ml-4 px-2 border border-gray-400"
       >
         Search
       </button>

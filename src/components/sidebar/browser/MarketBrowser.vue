@@ -35,7 +35,7 @@ export default {
 </script>
 
 <template>
-  <ul class="bg-gray-700 text-white divide-y divide-gray-400">
+  <ul class="divide-y divide-gray-400">
     <MarketBrowserGroup
       v-for="item in marketTree"
       :key="item.id"
